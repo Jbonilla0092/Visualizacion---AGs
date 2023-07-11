@@ -1,0 +1,115 @@
+<div id="app">
+<span class = "negrita">Nombre:</span> Juan Manuel Bonilla Lozano
+<br />
+<span class = "negrita"> URL: </span> 
+  <a href = "https://js-2crxdc.stackblitz.io" target = "_blank">
+    https://js-2crxdc.stackblitz.io
+  </a>
+<br />
+<span class= "negrita"> Github:</span>
+ <a href = "https://github.com/Jbonilla0092/08MBID---Visualizacion-de-Datos"  target="_blank">
+    https://github.com/Jbonilla0092/08MBID---Visualizacion-de-Datos
+  </a>
+
+ <br />
+
+<h1>Trabajo práctico</h1>
+<h2>Introducción</h2>
+
+<p>La academia es un gran abrebocas para prepararnos para la vida, es cuando nos enfrentamos al mundo laboral donde de verdad descubrimos la importancia de los datos, y todo lo que debe pasar para poder conseguirlos, pero ahí radica la nuestra relevancia como científicos de datos, puesto que debemos hablar con las partes implicadas para determinar cuál será la mejor opción que supla sus necesidades. Justamente lo que acabo de describir es la situación que nos lleva al desarrollo de este trabajo, a lo largo del mismo presentaré un caso real que se presentó en la empresa donde trabajo, que por confidencialidad no puedo revelar, detallaré las necesidades de las personas que lo solicitaron, la información que nos llegó y las visualizaciones que elegí para suplir su necesidad. En primer lugar, la compañía se dedica principalmente a operaciones cambiarias, generalmente son Pagos internacionales, es decir, personas del exterior que envían dinero a personas en Colombia. El área de cumplimiento de la empresa, lleva un proceso mensual denominado "variaciones mensuales" el cual presentan en comité periodicamente, este consiste en identificar en qué paises y municipios de Colombia se han presentado cambios significativos. Interesa también conocer las personas que tienen cuenta de ahorro con nuestra compañía, además de monitorear el desempeño de un conjunto particular de clientes denominados "Clientes TOP" que son predichos por un modelo que desarrollamos el cual procura identificar en las operaciones cambiarias de la compañía, posibles prospectos de clientes para abrir una cuenta de ahorro. Las visualizaciones implementadas fueron con tres orígenes diferentes: Power BI, Google Sheets y Data Wrapper. Los datos consisten en una base de datos transaccional que normalmente es de 800 mil transacciones, la estructura se presentará más adelante, sin embargo vale aclarar que muchos datos para este trabajo fueron modificados tanto en valores, como en IDs, además de información eliminada por seguridad.</p>
+
+<h2>Objetivos</h2>
+
+<p>Como objetivo principal de este trabajo es generar un tablero que supla las necesidades del área de cumplimiento de la empresa. Que perfectamente se pueda entregar y ser gestionado por ellos mismos.</p>
+
+<h2>Metodología</h2>
+
+<p>En esta sección describiré la base de datos utilizada, en este caso disponemos de tres bases de datos, </p>
+
+<p> <b>Base Principal:</b> Consta de nueve columnas: <br>
+  <br>
+  <b>a. Corresponsal:</b>  Corresponde al tipo de oficina donde proviene la transacción, los nombres en este caso fueron modificados.
+  <br>
+  <b>b. Cod_Municipio:</b>  Corresponde al código proporcionado por el DANE (Departamento Nacional de Estadística)[1] 
+  <br>
+  <b>c. Nuevo_ID:</b> Corresponde al nuevo ID de la persona, para mantener la confidencialidad fue re codificado.
+  <br>
+  <b>d. Monto_Pesos:</b> Representa el Monto transado en pesos colombianos. A lo largo de este trabajo se comentará en qué gráficos se presenta en miles de millones de pesos.
+  <br>
+  <b>e. País Origen:</b> Representa el código ISO utilizado para cada país de origen de la transacción.
+  <br>
+  <b>f. Nacionalidad:</b> Corresponde a la Nacionalidad de la persona.
+  <br>
+  <b>g. Fecha_tx:</b>  Fecha de la transacción, comprendida entre enero y abril de 2023.
+  <br>
+  <b>h. TOP:</b> variable binaria que representa si la persona es o no considerado como cliente TOP para la compañía.
+  <br>
+  <b>i. Cuenta:</b> Tiene cuenta de ahorro con la compañía.
+   </p>
+
+   
+<p> <b>Codigos DANE:</b> Esta es una base de datos que contiene los códigos de cada municipio y adicionalmente su nombre, latitud y longitud. <br>
+
+<p> <b>Codigos Paises:</b> Esta es una base de datos que contiene los códigos de cada país y adicionalmente su nombre, latitud y longitud. <br>
+<br>
+
+<iframe src="https://drive.google.com/file/d/17PfD164cr7vTxtsOPJKz4XWQL7wzfpxF/preview" width="640" height="300" allow="autoplay"></iframe>
+
+Una vez descritas las bases de datos, la metodología es la siguiente, mediante Power BI se generó un tablero principal, mientras que se realizaron gráficos adicionales en otros medios tales como Google Sheets y DataWrapper con el fin de comparar los gráficos de cada plataforma. 
+
+<br>
+
+tanto en DataWrapper como en power BI se generó una columna nueva denominada <b>Variación Mensual</b> la cual es una fórmula matemática donde el valor actual del mes se resta con el del mes anterior y se divide este cociente entre el valor del mes anterior, resulta al final un porcentaje el cual, si es positivo indica que el país o municipio transó más que en el mes anterior. 
+<h2>Desarrollo</h2>
+<h2>Montos diarios clientes TOP</h2>
+<p>El gráfico presentado a continuación muestra el comportamiento diario para el mes de Marzo de 2023, donde el comportamiento transaccional de los clientes TOP se diferencia ampliamente de los demás. para tener contexto, hay 24.649 clientes en total, de los cuales 12.280 son considerados TOP, siendo casi la mitad de personas presentan amplias diferencias entre las dos clasificaciones, sólo hay pocos días específicos en los cuales los clientes normales superan a los clientes TOP. Este gráfico fue realizado mediante Google Sheets y también incorporado en el tablero de Power BI. </p>
+
+
+<iframe width="616" height="371" seamless frameborder="0" scrolling="no" src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRN746-ZleSkR1tzB830_bpo9WjEHHWsiDzrd_63NHp8OWy22x7tnpUde3a3Exjx5tHr-F6wOarRcyb/pubchart?oid=1361562743&amp;format=interactive"></iframe>
+<br />
+
+
+<h2>Mapa por variación y montos</h2>
+<p>Este es un mapa realizado mediante DataWrapper, una plataforma muy intuitiva y versátil que no necesita registrarse como tal. El mapa presentado presenta mundialmente dónde se encuentran las concentraciones principales de Montos transados, el gráfico consta de dos características. La primera es que el tamaño de las burbujas está definido por la suma del monto transado en pesos colombianos del País, mientras que el color es una escala que se muestra en la leyenda, dependiendo del color que tenga, así mismo será la variación que tuvo el país. <br> Dentro del objeto visual se puede modificar el zoom del mapa de tal manera que se pueda examinar un país a profundidad. Este mismo mapa se generó en Power BI, en parte para examinar cómo se pueden implementar las mismas ideas en diferentes plataformas. </p>
+
+<iframe title="Mapa mundial por variación" aria-label="Map" id="datawrapper-chart-kBufk" src="https://datawrapper.dwcdn.net/kBufk/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="358" data-external="1"></iframe><script type="text/javascript">!function(){"use strict";window.addEventListener("message",(function(a){if(void 0!==a.data["datawrapper-height"]){var e=document.querySelectorAll("iframe");for(var t in a.data["datawrapper-height"])for(var r=0;r<e.length;r++)if(e[r].contentWindow===a.source){var i=a.data["datawrapper-height"][t]+"px";e[r].style.height=i}}}))}();
+</script>
+
+<h2>Tablero de control en Power BI</h2>
+<p> Este tablero fue diseñado con algunos de los gráficos implementados anteriormente, esta herramienta me parece de las más interesantes en cuanto a visualización, es muy versátil, de fácil entendimiento y de muy buena calidad visual. De lejos es mi preferida entre las tres consideradas. Se cargó la base de datos desde un archivo de excel, y poco a poco se fueron creando los objetos visuales que se explicarán con más detalle a continuación. Es importante definir cómo se creó la variable de variación mensual. Para explicarlo un poco mejor presentaré la siguiente figura:  </p>
+
+<iframe src="https://drive.google.com/file/d/1zpaE9o1LAUtSTu9BJ7ZAG6gC5yuhJH5n/preview" width="640" height="250" allow="autoplay"></iframe>
+
+<p>Como se puede observar, la fórmula empieza con la sentencia ISFILTERED el cual permite que el cálculo varíe en la medida de que se van realizando filtros, cosa que es muy importante pues si seleccionamos algún país en específico, o un conjunto de clientes en particular la fórmula y el sentido de la misma no se verá alterado, seguirá mostrando una variación del mes actual frente al anterior. <br> lo siguiente será definir una variable denominada prev_month, que en esencia calculará la suma transada en pesos correspondiente al mes anterior, si quisieramos calcular la fórmula para dos meses atrás, habría que cambiar el "-1" de la fórmula por un "-2" y así por la cantidad de periodos necesarios. finalmente se realiza la división propuesta en la metodología del trabajo.</p>
+
+<h2>Tablero de control</h2>
+<p>A continuación se presenta el tablero de control utilizado, tiene una tonalidad oscura que me pareció acertada, dado que los colores toman un rol muy importante, al menos en los mapas. Por su parte, vale la pena resaltar que cree una variable que se llama "pesos legibles" que representan a los montos transados en pesos dividido entre mil millones. Esto se justifica porque las cantidades en pesos son muy altas y al momento de la interpretación y la visualización es más fácil verlos en miles de millones. </p>
+
+<iframe src="https://drive.google.com/file/d/14uwgRo2Aji_UevTwxom-ni6uHfvjA30q/preview" width="640" height="250" allow="autoplay"></iframe>
+<p>Primero, en la parte superior izquierda tenemos dos casillas de filtros y una tarjeta de doble información. Los filtros son para revisar los diferentes corresponsales presentes en la data, además del mes que queremos examinar y todo el tablero girará en torno a esto. Para el ejemplo, todo el tablero está filtrado en el mes de marzo de 2023.</p>
+<iframe src="https://drive.google.com/file/d/1woTXr29i38CmIZtKRkNUf59tSzKmW2nQ/preview" width="540" height="80" allow="autoplay"></iframe>
+
+<p>Acto seguido tenemos el primer gráfico, un diagrama de barras que en el eje x tiene el día del mes, mientras que las barras representan la suma de montos transaccionales, de aquí podemos observar que los días pico de transacción fueron el 3, 6, 16 y 21 de marzo teniendo en promedio 6.900.000 millones de pesos.</p>
+<iframe src="https://drive.google.com/file/d/1zgbCQWCaLXUV4UxkPLwVCWSmfUu3-D1z/preview" width="640" height="250" allow="autoplay"></iframe>
+
+<p>En la esquina inferior izquierda se presentan dos gráficos, el primero es el mismo generado mediante google Sheets y el segundo es un diagrama de donut, el cual representa la proporción de clientes que tienen cuenta de ahorro en la compañía, esto le ayudará a las personas a centrarse no sólo en cómo transan los clientes TOP, sino en cuál es la cantidad de personas con cuenta de ahorro y revisar oportunidades de mejora. En este caso 21,8% de personas tienen cuenta de ahorro, de ellas 4.819 son clientes TOP.</p>
+
+<iframe src="https://drive.google.com/file/d/1OmR-chRqUtpKqTvfyN_WztYo8xq6PthW/preview" width="640" height="250" allow="autoplay"></iframe>
+
+<h2>Mapas</h2>
+<p>Este apartado es muy particular, pues a comparación de lo obtenido mediante DataWrapper, me parece que la capa de personalización en Mapas de Power BI está a otro nivel, en sí es el mismo concepto, con la diferencia que se presenta además del mapamundi, un mapa de la ciudad destino del giro. cada Mapa presenta unas burbujas que aparte de indicar en qué países/ municipios se transó, indica por el tamaño de la burbuja dónde está el mayor acumulado de dinero. </p>
+<iframe src="https://drive.google.com/file/d/196kPVeV2Z8QqTXRo6ikKtDK8WnjPEqXN/preview" width="640" height="250" allow="autoplay"></iframe>
+
+<iframe src="https://drive.google.com/file/d/1CoeYVaWU6mzdgYcGOC4x9eGCwcPGkxsP/preview" width="640" height="250" allow="autoplay"></iframe>
+
+<p>Cada mapa presenta adicionalmente una descripción de cada país que se despliega cada que ponemos el cursor sobre la burbuja, la descripción consta de Latitud, longitud, Nombre del país, Monto transado total, PPT (promedio por transacción), cantidad de operaciones realizadas, cantidad de clientes y la propia variación, esta descripción de ejemplifica en el siguiente gráfico:.</p>
+
+<iframe src="https://drive.google.com/file/d/10BFkU0EDbRtFEXsGQRvd8Z9uW9E5tw1E/preview" width="640" height="250" allow="autoplay"></iframe>
+
+Finalmente, cada mapa presenta una escala de color, que se da gracias a a la fórmula explicada anteriormente para la variación mensual, la colorimetría indica que si la burbuja es de color rojo, la variación mensual de aquel país/municipio fue negativa, es decir, el mes actual dejó de percibir dinero frente al mes anterior, el color es rojo por ser una preocupación para el área que debe examinarse. Mientras que el color verde es el caso contrario, cuando durante el mes actual se transó más que en el mes anterior. Finalmente tenemos el caso donde la variación haya sido exactamente de cero, lo cual ocurre pocas veces.
+En el gráfico aparecen puntos de color azul oscuro, lo que indica que la variación fue inexistente, es decir, hubo transacciones el mes actual, pero no el mes anterior.
+
+<iframe src="https://drive.google.com/file/d/1r28qmB4Boi-B-Ihl62Ku1vgzvEt27Cb2/preview" width="640" height="250" allow="autoplay"></iframe>
+
+<h1>Conclusiones</h1>
+Este trabajo me permitió abrir mucho mi panorama, primero, porque no conocía StackBlitz y me parece muy útil poder generar informes en PDF con gráficos interactivos conectados a un HTML, además de incursionar en otras herramientas que no conocía como lo es DataWrapper. Contar una historia no es nada fácil, menos si la quieres dar a entender mediante objetos visuales, entender las necesidades de las personas y transformarlas en un producto que sea funcional y que de verdad les ayude es una experiencia demandante, pero gratificante. Pese a que en este trabajo se utilizaron datos modificados por temas de confidencialidad, si es una solicitud real que le hicieron a mi área y para la fecha de escrito este trabajo el tablero sigue como proyecto vigente, puesto que faltan algunos objetos visuales adicionales, además de más hojas que suplan más necesidades.
